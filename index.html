@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#faf7f1">
+<title>Royal Surprise Studio</title>
+<style>
+:root{--ink:#30292a;--muted:#776d6c;--paper:#fffdf9;--cream:#f7f2e9;--line:#e8e1d7;--rose:#bf7c89;--lav:#b58cdd;--lavbg:#f3eafb;--green:#547c60}
+*{box-sizing:border-box}body{margin:0;background:#faf9f6;color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer}
+header{height:66px;position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 18px}
+.brand{font:23px Georgia,serif}.brand small{display:block;font:9px system-ui;letter-spacing:2px;color:#997d7b;text-transform:uppercase}.saved{color:var(--green);font-size:12px;font-weight:700}
+.wrap{max-width:1100px;margin:auto;padding:20px 16px 120px}.title{font:30px Georgia,serif;margin:8px 0 16px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:22px;align-items:start}
+.preview{position:sticky;top:84px;background:linear-gradient(145deg,#f4ede2,#eae4d9);border-radius:25px;padding:18px 12px 30px;text-align:center}
+.phone{width:min(330px,100%);margin:auto;background:#1b102b;border:8px solid #282323;border-radius:40px;padding:7px;box-shadow:0 14px 30px #21152135}
+.screen{height:570px;overflow:auto;border-radius:27px;padding:15px 15px 22px;color:#fff;background:radial-gradient(ellipse at 50% 95%,#a34e91,#41165f 55%,#180b30 100%);position:relative}
+.screen:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 15% 12%,#fff5 1px,transparent 2px),radial-gradient(circle at 85% 28%,#fff7 1px,transparent 2px),radial-gradient(circle at 20% 70%,#fff5 1px,transparent 2px)}
+.pnav{font-size:10px;color:#eadff0;position:relative}.castle{height:205px;margin:18px 0 5px;position:relative}.castle svg{width:100%;height:100%}
+.moon{position:absolute;right:15%;top:12px;font-size:34px;color:#ffe9aa}
+.crown{font-size:36px;margin:6px}.screen h2{font:italic 27px Georgia,serif;line-height:1.2;margin:8px 0 12px;position:relative}.screen p{font-size:13px;line-height:1.65;color:#f3e8f4;position:relative}
+.screen .cta{border:2px solid #ffc4d0;border-radius:30px;background:linear-gradient(90deg,#e87ca7,#c74d91);color:white;padding:12px 15px;font-size:12px;font-weight:750;position:relative}
+.screen .sample-img{width:100%;max-height:160px;object-fit:cover;border-radius:12px;margin:8px 0}
+.preview-hint{font-size:11px;color:#6e5e59;margin:12px 0 0}
+.editor-intro{background:linear-gradient(110deg,#f1eafb,#fff0f4);border:1px solid #e1c9ed;border-radius:20px;padding:17px;display:flex;gap:13px;margin:15px 0 20px}
+.gem{width:43px;height:43px;flex:none;border-radius:50%;background:#e7d7fb;display:grid;place-items:center;font-size:21px}.editor-intro b{font-size:16px}.editor-intro p{margin:5px 0 0;color:#796e7a;line-height:1.5;font-size:14px}
+.step{background:#fff;border:1px solid var(--line);border-radius:20px;margin:12px 0;overflow:hidden}.step.open{border-color:#d9c1e8}
+.step-head{width:100%;border:0;background:transparent;display:flex;align-items:center;gap:11px;text-align:left;padding:15px}
+.num{width:36px;height:36px;border-radius:50%;background:#302a2b;color:#fff;display:grid;place-items:center;font-weight:750;flex:none}.step.open .num{background:#c17f8d}
+.ic{width:39px;height:39px;border-radius:12px;background:var(--lavbg);color:#a579d1;display:grid;place-items:center;font-size:20px;flex:none}.stitle{font-weight:750;flex:1}.meta{font-size:10px;letter-spacing:1px;color:#817772;background:#f7f3ec;padding:7px 10px;border-radius:30px;white-space:nowrap}.arrow{color:#938b85}
+.step-body{display:none;border-top:1px solid #f0ebe4;padding:0 16px 19px}.step.open .step-body{display:block}
+.field{margin-top:16px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:7px}.field input[type=text],.field textarea,.field select{width:100%;padding:13px 14px;border:2px solid #ece6dc;border-radius:14px;background:#fffefa;outline:none}.field textarea{min-height:85px;resize:vertical;line-height:1.5}.field input:focus,.field textarea:focus{border-color:#c78b98}.field input[type=file]{width:100%;font-size:12px}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:10px}.hint{font-size:11px;color:#8a817e;line-height:1.5;margin:7px 0 0}
+.btn{border:0;border-radius:14px;padding:13px 17px;background:#2e2728;color:#fff;font-weight:750}.btn.pink{background:#bd7888}.btn.light{background:#f6f0e9;color:#403536}
+.bottom{position:fixed;z-index:6;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);box-shadow:0 -7px 22px #30221a0c;padding:11px max(14px,calc((100vw - 1060px)/2));display:flex;align-items:center;gap:12px}.auto{font-size:12px;color:var(--green);font-weight:700;flex:1}.bottom .btn{font-size:16px;padding:15px 23px}
+#recipient{display:none;position:fixed;inset:0;z-index:20;background:#160b28;color:white;overflow:auto}.recipient-inner{max-width:520px;min-height:100%;margin:auto;text-align:center;padding:35px 22px 60px;background:radial-gradient(ellipse at 50% 95%,#a34e91,#41165f 55%,#180b30)}.recipient h1{font:italic 35px Georgia,serif}.recipient p{line-height:1.8;color:#f4e9f5}.recipient .big{font-size:62px}.recipient .rbtn{border:2px solid #ffc4d0;border-radius:30px;background:linear-gradient(90deg,#e87ca7,#c74d91);color:white;padding:13px 22px;font-weight:750}.recipient .rphoto{max-width:100%;max-height:230px;object-fit:cover;border-radius:13px;margin:8px}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.preview{position:relative;top:auto;order:-1}.phone{width:min(310px,100%)}.screen{height:520px}.wrap{padding-top:14px}.title{font-size:27px}}
+@media(max-width:420px){.meta{display:none}.bottom .btn{padding:14px 16px;font-size:14px}.auto{font-size:11px}}
+</style>
+</head>
+<body>
+<header><div class="brand">Royal Surprise <small>Gift studio</small></div><div class="saved">✓ Auto-saved in this browser</div></header>
+<div class="wrap" id="editor">
+<h1 class="title">My Princess, My Whole World</h1>
+<div class="layout">
+<div>
+<div class="editor-intro"><div class="gem">♢</div><div><b>Every word can be yours.</b><p>Personalise the royal journey, from the first invitation to the final surprise. Open any step to edit it and watch the preview change.</p></div></div>
+<div id="steps"></div>
+</div>
+<aside class="preview"><div class="phone"><div class="screen" id="screen"></div></div><div class="preview-hint">Live preview · changes appear here</div></aside>
+</div>
+</div>
+<div class="bottom" id="bottom"><div class="auto">☁ Saved on this device</div><button class="btn light" onclick="previewRecipient()">Preview</button><button class="btn" onclick="makeShare()">Create this gift →</button></div>
+<div id="recipient"><div class="recipient-inner" id="recipientInner"></div></div>
+<div id="qrResult" style="display:none;position:fixed;inset:0;z-index:30;background:#faf7f1;overflow:auto;padding:24px 16px">
+  <div style="max-width:520px;margin:25px auto;background:white;border:1px solid #e8e1d7;border-radius:24px;padding:24px;text-align:center">
+    <div style="font:28px Georgia,serif;margin-bottom:8px">Your royal gift is ready</div>
+    <p style="color:#776d6c;line-height:1.6">Scan this QR code with a phone camera to open the exact gift you just created.</p>
+    <div id="qrCode" style="display:flex;align-items:center;justify-content:center;width:100%;min-height:300px;max-width:390px;margin:12px auto;padding:12px;background:#fff;border:1px solid #eee;border-radius:16px;overflow:hidden"></div>
+    <p style="font-size:12px;color:#776d6c">Point another phone’s camera at this code. It should open your published gift page — not this QR image. Don’t tap the QR image itself.</p>
+    <div id="giftLink" style="overflow-wrap:anywhere;text-align:left;background:#faf7f1;border-radius:12px;padding:11px;font-size:11px;color:#625957;margin:12px 0"></div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px">
+      <button class="btn" onclick="openGiftUrl()">Open gift page ↗</button>
+      <button class="btn light" onclick="downloadQR()">Download QR</button>
+      <button class="btn light" onclick="closeQR()">Back to editor</button>
+    </div>
+  </div>
+</div>
+<script>
+const defaults={
+to:"Riya",from:"Aman",relation:"My Princess",inviteTitle:"Attention, Your Royal Highness...",inviteText:"Someone has a little royal surprise waiting just for you, Princess Riya.",welcome:"Welcome to Your Little Kingdom, Princess Riya",kingdom:"A little kingdom made just for you. May every corner remind you how special you are.",letterTitle:"A Little Letter from Your Biggest Admirer",letter:"Dear Princess Riya,\\n\\nI hope this little surprise makes you smile. You deserve kindness, laughter and all the lovely things life has to offer. Never forget how wonderful you are.\\n\\nWith love,",cards:["Your Smile","Your Kind Heart","Your Beautiful Soul","Your Strength","Your Little Habits","Everything About You"],gifts:["A wish come true","A day full of smiles","A surprise picked for you"],promiseTitle:"My Promises to You",promises:["I will always cheer for you.","I will listen when you need someone.","I will celebrate your little wins.","I will remind you how special you are.","I will wish you happiness, always."],finalTitle:"My Princess, My Whole World",finalText:"I hope this little royal world reminds you that you are appreciated more than words can say. Happy Princess Day!",musicName:"Choose music from your device"
+};
+let data=JSON.parse(JSON.stringify(defaults)),photos=[],musicUrl="",stage=0;
+const defs=[
+["Who is it for?","♟","2 FIELDS",`<div class="field"><label>Her name</label><input data-k="to" type="text"></div><div class="field"><label>Your name</label><input data-k="from" type="text"></div>`],
+["She is your...","✎","RELATIONSHIP",`<div class="field"><label>Choose the title</label><select data-k="relation"><option>My Princess</option><option>My Best Friend</option><option>My Sister</option><option>My Favourite Person</option><option>My Queen</option><option>Someone Special</option></select></div>`],
+["The invitation","✉","2 FIELDS",`<div class="field"><label>Invitation heading</label><input data-k="inviteTitle" type="text"></div><div class="field"><label>Invitation message</label><textarea data-k="inviteText"></textarea></div>`],
+["Her kingdom","⌂","2 FIELDS",`<div class="field"><label>Kingdom welcome title</label><input data-k="welcome" type="text"></div><div class="field"><label>Kingdom message</label><textarea data-k="kingdom"></textarea></div>`],
+["Your letter","✎","MOST EDITED",`<div class="field"><label>Letter heading</label><input data-k="letterTitle" type="text"></div><div class="field"><label>Your letter</label><textarea data-k="letter"></textarea></div>`],
+["Six royal cards","▦","6 CARDS",`<div class="twocol">${defaults.cards.map((v,i)=>`<div class="field"><label>Card ${i+1}</label><input data-card="${i}" type="text"></div>`).join("")}</div>`],
+["Her gift","♙","3 GIFTS",`<div class="twocol">${defaults.gifts.map((v,i)=>`<div class="field"><label>Gift ${i+1}</label><input data-gift="${i}" type="text"></div>`).join("")}</div>`],
+["Your promise","☾","5 FIELDS",`<div class="field"><label>Promise heading</label><input data-k="promiseTitle" type="text"></div>${defaults.promises.map((v,i)=>`<div class="field"><label>Promise ${i+1}</label><input data-promise="${i}" type="text"></div>`).join("")}`],
+["The finale","✧","UP TO 3 PHOTOS",`<div class="field"><label>Final heading</label><input data-k="finalTitle" type="text"></div><div class="field"><label>Final message</label><textarea data-k="finalText"></textarea></div><div class="field"><label>Add up to 3 photos</label><input type="file" accept="image/*" multiple id="photoFiles"><p class="hint">Photos stay in this browser. For a public link, use photos hosted online or add them after publishing.</p></div>`],
+["Music","♫","FREE",`<div class="field"><label>Choose a music file</label><input type="file" accept="audio/*" id="musicFile"><p class="hint">Music plays when the recipient opens the gift. Browsers may require a tap before audio starts.</p></div>`]
+];
+function buildSteps(){const host=document.getElementById('steps');host.innerHTML=defs.map((d,i)=>`<section class="step ${i===0?'open':''}" id="step${i}"><button class="step-head" onclick="toggle(${i})"><span class="num">${i+1}</span><span class="ic">${d[1]}</span><span class="stitle">${d[0]}</span><span class="meta">${d[2]}</span><span class="arrow">⌄</span></button><div class="step-body">${d[3]}</div></section>`).join('');
+host.querySelectorAll('[data-k]').forEach(el=>{el.value=data[el.dataset.k]||'';el.addEventListener('input',()=>{data[el.dataset.k]=el.value;refresh()})});
+host.querySelectorAll('[data-card]').forEach(el=>{el.value=data.cards[+el.dataset.card];el.addEventListener('input',()=>{data.cards[+el.dataset.card]=el.value;refresh()})});
+host.querySelectorAll('[data-gift]').forEach(el=>{el.value=data.gifts[+el.dataset.gift];el.addEventListener('input',()=>{data.gifts[+el.dataset.gift]=el.value;refresh()})});
+host.querySelectorAll('[data-promise]').forEach(el=>{el.value=data.promises[+el.dataset.promise];el.addEventListener('input',()=>{data.promises[+el.dataset.promise]=el.value;refresh()})});
+document.getElementById('photoFiles').addEventListener('change',e=>{photos=[];[...e.target.files].slice(0,3).forEach(f=>photos.push(URL.createObjectURL(f)));refresh()});
+document.getElementById('musicFile').addEventListener('change',e=>{if(e.target.files[0])musicUrl=URL.createObjectURL(e.target.files[0])});
+}
+function toggle(i){document.querySelectorAll('.step').forEach((s,n)=>s.classList.toggle('open',i===n&&!s.classList.contains('open')));stage=i;refresh()}
+function castle(){return `<div class="castle"><span class="moon">☾</span><svg viewBox="0 0 320 210" aria-label="Illustrated pink castle"><rect x="38" y="90" width="244" height="115" fill="#e78fbc"/><rect x="98" y="48" width="124" height="157" fill="#f3b3d0"/><rect x="133" y="4" width="54" height="201" fill="#f7c4d9"/><path d="M98 48 L160 0 L222 48Z" fill="#b98ce8"/><path d="M38 90 L70 35 L102 90Z" fill="#ae83dc"/><path d="M218 90 L250 35 L282 90Z" fill="#ae83dc"/><path d="M133 4 L160 -25 L187 4Z" fill="#c5a1ed"/><g fill="#ffe98c"><circle cx="65" cy="128" r="8"/><circle cx="255" cy="128" r="8"/><circle cx="119" cy="112" r="8"/><circle cx="201" cy="112" r="8"/><circle cx="160" cy="82" r="8"/></g><path d="M145 205v-24a15 15 0 0 1 30 0v24" fill="#75427e"/><g fill="#ff8ab4"><path d="M68 35V18l14 5-14 5M252 35V18l14 5-14 5M160 -25v-15l14 5-14 5"/></g><rect x="0" y="204" width="320" height="6" fill="#311342"/></svg></div>`}
+function renderScreen(){const s=document.getElementById('screen');let body='';
+if(stage<=2)body=`${castle()}<div class="crown">👑</div><h2>${esc(data.inviteTitle)}</h2><p>${esc(data.inviteText.replaceAll('Riya',data.to))}</p><button class="cta" onclick="previewRecipient()">Open Your Royal Invitation ✉</button>`;
+else if(stage===3)body=`<div class="crown">🏰</div><h2>${esc(data.welcome.replaceAll('Riya',data.to))}</h2><p>${esc(data.kingdom)}</p><div style="font-size:50px">🌷 ✨ 🌷</div>`;
+else if(stage===4)body=`<div class="crown">💌</div><h2>${esc(data.letterTitle)}</h2><p style="white-space:pre-line">${esc(data.letter.replaceAll('Riya',data.to))}</p>`;
+else if(stage===5)body=`<div class="crown">💖</div><h2>Do You Know Why You're So Special?</h2>${data.cards.map(x=>`<p>♡ ${esc(x)}</p>`).join('')}`;
+else if(stage===6)body=`<div class="crown">🎁</div><h2>A little gift for you</h2>${data.gifts.map(x=>`<p>✦ ${esc(x)}</p>`).join('')}<div style="font-size:45px">🎀</div>`;
+else if(stage===7)body=`<div class="crown">🌙</div><h2>${esc(data.promiseTitle)}</h2>${data.promises.map(x=>`<p>♡ ${esc(x)}</p>`).join('')}`;
+else if(stage===8)body=`<div class="crown">✨</div><h2>${esc(data.finalTitle)}</h2><p>${esc(data.finalText)}</p>${photos.map(src=>`<img class="sample-img" src="${src}">`).join('')}`;
+else body=`<div class="crown">♫</div><h2>A song for you</h2><p>${esc(data.musicName)}</p>`;
+s.innerHTML=`<div class="pnav">♥ SAMPLE · ROYAL SURPRISE <span style="float:right">✦</span></div>${body}`;
+}
+function refresh(){renderScreen()}
+function esc(x){return String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function recipientPage(){const steps=[
+["👑",data.inviteTitle,data.inviteText.replaceAll('Riya',data.to),"Open Your Royal Invitation"],
+["💗",`${data.to}, ${data.relation}`,"A little royal world has been made just for you.","Continue"],
+["✉",data.welcome.replaceAll('Riya',data.to),data.kingdom,"Enter the kingdom"],
+["💌",data.letterTitle,data.letter.replaceAll('Riya',data.to),"Read on"],
+["💖","Do You Know Why You're So Special?",data.cards.map((x,i)=>`${i+1}. ${x}`).join("\\n"),"One more surprise"],
+["🎁","A little gift for you",data.gifts.map(x=>"✦ "+x).join("\\n"),"Open your gift"],
+["🌙",data.promiseTitle,data.promises.map(x=>"♡ "+x).join("\\n"),"Keep this promise"],
+["✨",data.finalTitle,data.finalText,"The end"],
+["🌷","Happy Princess Day",`Made with care by ${data.from}.`,"Finish"]
+];return steps}
+let rStep=0;
+function showRecipient(){const all=recipientPage();const [ico,title,txt,btn]=all[rStep];const imgs=rStep===7?photos.map(x=>`<img class="rphoto" src="${x}">`).join(''):'';document.getElementById('recipientInner').innerHTML=`<div class="big">${ico}</div><div style="font-size:11px;letter-spacing:3px;color:#e8c4e9">A ROYAL SURPRISE FOR ${esc(data.to.toUpperCase())}</div><h1>${esc(title)}</h1><p style="white-space:pre-line">${esc(txt)}</p>${imgs}<button class="rbtn" onclick="nextRecipient()">${btn} →</button><p style="font-size:11px;opacity:.65;margin-top:30px">${rStep+1} / ${all.length}</p>`}
+function nextRecipient(){if(rStep<recipientPage().length-1){rStep++;showRecipient()}else{document.getElementById('recipient').style.display='none';document.getElementById('editor').style.display='';document.getElementById('bottom').style.display='flex'}}
+function previewRecipient(){rStep=0;document.getElementById('editor').style.display='none';document.getElementById('bottom').style.display='none';document.getElementById('recipient').style.display='block';showRecipient()}
+let currentGiftUrl='';
+function makeShare(){
+ const params=new URLSearchParams();
+ params.set('gift',btoa(unescape(encodeURIComponent(JSON.stringify(data)))));
+ // This is the URL the scanner must open. The QR image service is only used to draw the code.
+ if(!['http:','https:'].includes(location.protocol) || !location.hostname || location.hostname==='localhost' || location.hostname==='127.0.0.1'){
+   document.getElementById('qrResult').style.display='block';
+   document.getElementById('qrCode').innerHTML='<div style="padding:22px;text-align:center;color:#f5dfe7;line-height:1.6"><strong style="font-size:18px">Publish this website first</strong><p>This app is currently opened from a phone file address, not a public website. A QR made here cannot open your gift on another phone.</p><p>Upload the website to a host such as Netlify or GitHub Pages. Then open its public <b>https://</b> link, create your gift again, and tap Create this gift.</p></div>';
+   document.getElementById('giftLink').textContent='No public gift link yet — publish the website first.';
+   currentGiftUrl='';
+   return;
+ }
+ const url=location.origin+location.pathname+'?'+params.toString();
+ currentGiftUrl=url;
+ document.getElementById('giftLink').textContent='Gift destination: '+url;
+ const qrHost=document.getElementById('qrCode');
+ qrHost.innerHTML='<p style="color:#776d6c;padding:30px">Making your gift QR…</p>';
+ document.getElementById('qrResult').style.display='block';
+ const qrImage=document.createElement('img');
+ qrImage.alt='Scan this code to open the personalised gift page';
+ qrImage.width=360; qrImage.height=360;
+ qrImage.style.cssText='display:block;width:min(360px,100%);height:auto;margin:auto;image-rendering:pixelated';
+ qrImage.onload=()=>{qrHost.innerHTML='';qrHost.appendChild(qrImage);};
+ qrImage.onerror=()=>{qrHost.innerHTML='<p style="color:#9b4d58;padding:22px">Could not load the QR picture. Check your internet connection and try again.</p>';};
+ qrImage.src='https://api.qrserver.com/v1/create-qr-code/?size=360x360&format=png&ecc=H&margin=16&data='+encodeURIComponent(url);
+}
+async function downloadQR(){
+ const img=document.querySelector('#qrCode img');
+ if(!img){alert('The QR code is not ready yet.');return;}
+ try{
+   const response=await fetch(img.src);
+   if(!response.ok) throw new Error('QR download failed');
+   const blob=await response.blob();
+   const objectUrl=URL.createObjectURL(blob);
+   const a=document.createElement('a');a.href=objectUrl;a.download='my-royal-gift-qr.png';document.body.appendChild(a);a.click();a.remove();
+   setTimeout(()=>URL.revokeObjectURL(objectUrl),1500);
+ }catch(e){
+   alert('The QR is visible above. To save it, take a screenshot of the QR or use your browser’s Save image option. The QR still points to your gift page.');
+ }
+}
+function openGiftUrl(){if(currentGiftUrl)window.open(currentGiftUrl,'_blank','noopener');}
+function closeQR(){document.getElementById('qrResult').style.display='none';}
+function loadGift(){const p=new URLSearchParams(location.search);if(p.has('gift')){try{data={...data,...JSON.parse(decodeURIComponent(escape(atob(p.get('gift')))))};document.getElementById('editor').style.display='none';document.getElementById('bottom').style.display='none';document.getElementById('recipient').style.display='block';showRecipient()}catch(e){}}}
+buildSteps();refresh();loadGift();
+</script>
+</body></html>
